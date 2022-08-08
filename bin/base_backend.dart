@@ -3,28 +3,17 @@ import 'package:shelf/shelf_io.dart';
 import 'package:mysql1/mysql1.dart';
 import 'package:commons_core/commons_core.dart';
 
+import 'core/database/database_mysql_adapter_imp.dart';
+
 void main() async {
-  var result = await CustomEnv.get<String>(key: 'chave');
-  print(result);
-
-  final conn = await MySqlConnection.connect(
-    ConnectionSettings(
-      host: 'localhost',
-      port: 3306,
-      user: 'root',
-      db: 'delivery',
-      password: 'root',
-    ),
-  );
-
-  // await conn
+  // await DatabaseMysqlAdapterImp()
   //     .query("INSERT INTO tb_permissoes(nome, status) values ('ADMIN', 'A')");
-  print(await conn.query('SELECT * FROM tb_permissoes'));
+  print(await DatabaseMysqlAdapterImp().query('SELECT * FROM tb_permissoes'));
 
-  await serve(
-    (Request req) => Response(200,
-        body: 'Olá mundo', headers: {'content-type': 'application/json'}),
-    'localhost',
-    8080,
-  );
+  // await serve(
+  //   (Request req) => Response(200,
+  //       body: 'Olá mundo', headers: {'content-type': 'application/json'}),
+  //   'localhost',
+  //   8080,
+  // );
 }
